@@ -1,0 +1,41 @@
+<!-- pom.xml -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.dynatrace.demo</groupId>
+    <artifactId>log-ingest-demo</artifactId>
+    <version>1.0.0</version>
+    <name>Dynatrace Log Ingest Demo</name>
+    <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <log4j2.version>2.20.0</log4j2.version>
+        <!-- Version del appender Dynatrace para Log4j2 -->
+        <dynatrace.appender.version>0.0.7</dynatrace.appender.version>
+    </properties>
+
+    <dependencies>
+        <!-- Dependencias de Log4j2 API y Core -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${log4j2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j2.version}</version>
+        </dependency>
+
+        <!-- Dependencia del Appender de Dynatrace para ingesta de logs -->
+        <!-- NOTA: Asegúrate de que esta librería es accesible en tu repositorio Maven. 
+             Si no lo está, tendrás que instalarla manualmente o configurar un repositorio. 
+             Para esta demo, asumimos que puedes acceder a la versión 0.0.7. -->
+        <dependency>
+            <groupId>io.github.michaljonko</groupId>
+            <artifactId>dynatrace-log4j2-appender</artifactId>
+            <version>${dynatrace.appender.version}</version>
+        </dependency>
+    </dependencies>
+</project>

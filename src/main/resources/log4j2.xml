@@ -1,0 +1,52 @@
+<!-- log4j2.xml -->
+<!-- Colocar este archivo en 'src/main/resources/' -->
+<Configuration status="WARN">
+    <!-- Define las propiedades de configuración para Dynatrace -->
+    <Properties>
+        <!-- **** REEMPLAZAR ESTOS VALORES CON TU PROPIA CONFIGURACIÓN **** -->
+        <!-- URL de tu ambiente o ActiveGate, terminando en /api/v2/logs/ingest -->
+        <Property name="DT_URL">https://dvq06456.live.dynatrace.com/api/v2/logs/ingest</Property>
+        <!-- Token de API con permiso logs.ingest -->
+        <Property name="DT_TOKEN">dt0c01.NXBPA4LH3KYCB4C7LXMFPXJU.ZRMOTGY3G4UCPR7VMSWO22QMCS5L3TE4OQNY75KDIS2GOAZ65BIKTWQPNXDLASZJ</Property>
+        <!-- **** FIN DE LA CONFIGURACIÓN PERSONALIZADA **** -->
+
+        <!-- Atributos que se añadirán a cada log y que se verán en Dynatrace -->
+        <Property name="SERVICE_NAME">LogDemoService-Java</Property>
+        <Property name="LOG_SOURCE">Java_Log4j2_Appender_Demo</Property>
+        <Property name="HOST_NAME">AE_Ubuntu</Property>
+    </Properties>
+
+    <Appenders>
+        <!-- Appender de Consola para ver los logs localmente -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout
+                pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+        </Console>
+
+        <!-- Appender de Dynatrace para enviar logs directamente a la API -->
+        <!-- El nombre de la clase es 'DynatraceGenericLogIngestAppender' -->
+        <DynatraceGenericLogIngestAppender name="DynatraceAppender"
+                                           activeGateUrl="https://dvq06456.live.dynatrace.com/api/v2/logs/ingest"
+                                           token="dt0c01.NXBPA4LH3KYCB4C7LXMFPXJU.ZRMOTGY3G4UCPR7VMSWO22QMCS5L3TE4OQNY75KDIS2GOAZ65BIKTWQPNXDLASZJ">
+            
+            <!-- Propiedades que se enviarán como atributos enriquecidos en el log -->
+            <Property name="dt.log.source">${LOG_SOURCE}</Property>
+            <Property name="host.name">${HOST_NAME}</Property>
+            <Property name="service.name">${SERVICE_NAME}</Property>
+            <Property name="application.version">1.0-alpha</Property>
+            
+            <!-- Definición del layout del mensaje de log -->
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level - %msg%n" />
+        </DynatraceGenericLogIngestAppender>
+
+    </Appenders>
+
+    <Loggers>
+        <Root level="info">
+            <!-- Envía logs a la consola -->
+            <AppenderRef ref="Console" />
+            <!-- Envía logs al Appender de Dynatrace -->
+            <AppenderRef ref="DynatraceAppender" />
+        </Root>
+    </Loggers>
+</Configuration>
