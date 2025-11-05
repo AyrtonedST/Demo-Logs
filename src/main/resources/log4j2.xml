@@ -7,7 +7,7 @@
         <!-- URL de tu ambiente o ActiveGate, terminando en /api/v2/logs/ingest -->
         <Property name="DT_URL">https://dvq06456.live.dynatrace.com/api/v2/logs/ingest</Property>
         <!-- Token de API con permiso logs.ingest -->
-        <Property name="DT_TOKEN">dt0c01.NXBPA4LH3KYCB4C7LXMFPXJU.ZRMOTGY3G4UCPR7VMSWO22QMCS5L3TE4OQNY75KDIS2GOAZ65BIKTWQPNXDLASZJ</Property>
+        <Property name="DT_TOKEN">dt0s01.XXXXX</Property>
         <!-- **** FIN DE LA CONFIGURACIÓN PERSONALIZADA **** -->
 
         <!-- Atributos que se añadirán a cada log y que se verán en Dynatrace -->
@@ -27,7 +27,7 @@
         <!-- El nombre de la clase es 'DynatraceGenericLogIngestAppender' -->
         <DynatraceGenericLogIngestAppender name="DynatraceAppender"
                                            activeGateUrl="https://dvq06456.live.dynatrace.com/api/v2/logs/ingest"
-                                           token="dt0c01.NXBPA4LH3KYCB4C7LXMFPXJU.ZRMOTGY3G4UCPR7VMSWO22QMCS5L3TE4OQNY75KDIS2GOAZ65BIKTWQPNXDLASZJ">
+                                           token="dt0s01.XXXXXX">
             
             <!-- Propiedades que se enviarán como atributos enriquecidos en el log -->
             <Property name="dt.log.source">${LOG_SOURCE}</Property>
